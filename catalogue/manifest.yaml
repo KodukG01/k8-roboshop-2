@@ -23,7 +23,8 @@ metadata:
     project: roboshop
     tier: app
 spec:
-  selector: 1
+  replicas: 1
+  selector: 
   matchLabels:
     component: catalogue
     project: roboshop
