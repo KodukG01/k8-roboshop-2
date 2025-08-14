@@ -25,10 +25,10 @@ metadata:
 spec:
   replicas: 1
   selector: 
-  matchLabels:
-    component: catalogue
-    project: roboshop
-    tier: app
+    matchLabels:
+      component: catalogue
+      project: roboshop
+      tier: app
   template:
     metadata:
       labels:
