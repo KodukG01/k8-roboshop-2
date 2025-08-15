@@ -53,7 +53,7 @@ spec:
       volumeMounts:
         - name: ebs-volume
           mountPath: /usr/share/nginx/html
-  volumes:
+    volumes:
     - name: persistent-storage
       persistentVolumeClaim:
         claimName: static-pvc
