@@ -46,16 +46,16 @@ spec:
       labels:
         purpose: ebs-static
         project: roboshop
-  spec:
-    containers:
-    - name: ebs-container
-      image: nginx
-      volumeMounts:
+    spec:
+      containers:
+      - name: ebs-container
+        image: nginx
+        volumeMounts:
         - name: ebs-volume
           mountPath: /usr/share/nginx/html
-    volumes:
-    - name: persistent-storage
-      persistentVolumeClaim:
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
         claimName: static-pvc
 ---
 apiVersion: v1
