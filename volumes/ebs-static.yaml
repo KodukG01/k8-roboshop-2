@@ -25,7 +25,6 @@ spec:
     requests:
       storage: 15Gi
 
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -35,18 +34,18 @@ metadata:
     project: roboshop
 spec:
   replicas: 1
-  nodeSelector:
-    topology.kubernetes.io/zone: us-east-1a
   selector:
     matchLabels:
       purpose: ebs-static
-      project: roboshop 
+      project: roboshop
   template:
     metadata:
       labels:
         purpose: ebs-static
         project: roboshop
     spec:
+      nodeSelector:
+        topology.kubernetes.io/zone: us-east-1a
       containers:
       - name: ebs-container
         image: nginx
@@ -54,9 +53,10 @@ spec:
         - name: ebs-volume
           mountPath: /usr/share/nginx/html
       volumes:
-      - name: persistent-storage
+      - name: ebs-volume
         persistentVolumeClaim:
-        claimName: static-pvc
+          claimName: static-pvc
+
 ---
 apiVersion: v1
 kind: Service
