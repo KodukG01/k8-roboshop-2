@@ -9,7 +9,7 @@ metadata:
     project: roboshop
     tier: database
 spec:
-  ClusterIp: None 
+  clusterIP: None 
   selector:
     component: mongodb
     project: roboshop
