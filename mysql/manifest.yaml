@@ -79,7 +79,7 @@ spec:
           image: gautamjames/mysql:v1
           envFrom:
           - secretRef:
-            name: mysql
+              name: mysql
           volumeMounts:
           - name: mysql-data
             mountPath: /var/lib/mysql
