@@ -77,7 +77,7 @@ spec:
       containers:
         - name: mysql
           image: gautamjames/mysql:v1
-          envFromm:
+          envFrom:
           - secretRef:
             name: mysql
           volumeMounts:
