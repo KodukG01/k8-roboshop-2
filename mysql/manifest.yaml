@@ -13,7 +13,7 @@ data:
   MYSQL_ROOT_PASSWORD: "Um9ib1Nob3BAMQ=="
 ---
 apiVersion: v1
-kind: Service
+kind: Service-headless
 metadata:
   name: mysql
   namespace: roboshop
