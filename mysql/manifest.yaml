@@ -84,14 +84,14 @@ spec:
           - name: mysql-data
             mountPath: /var/lib/mysql
 
-volumeClaimTemplates:
-- metadata:
-    name: mysql-data
-  spec:
-    accessModes: [ "ReadWriteOnce" ]
-    storageClassName: "roboshop-ebs-sc"
-    resources:
-      requests:
-        storage: 2Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "roboshop-ebs-sc"
+      resources:
+        requests:
+          storage: 2Gi
 
 
