@@ -10,9 +10,49 @@ type: Opaque
 data:
   RABBITMQ_DEFAULT_USER: "cm9ib3Nob3A="
   RABBITMQ_DEFAULT_PASS: "cm9ib3Nob3AxMjM="
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-headless
+  namespace: roboshop
+  labels:
+    component: rabbitmq
+    project: roboshop
+    tier: database
+spec:
+  selector:
+    component: rabbitmq
+    project: roboshop
+    tier: database
+  ports:
+  - protocol: TCP
+    port: 5672 # service port
+    targetPort: 5672 # container port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+  namespace: roboshop
+  labels:
+    component: rabbitmq
+    project: roboshop
+    tier: database
+spec:
+  selector:
+    component: rabbitmq
+    project: roboshop
+    tier: database
+  ports:
+  - protocol: TCP
+    port: 5672 # service port
+    targetPort: 5672 # container port
+
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: rabbitmq
   namespace: roboshop
@@ -22,7 +62,7 @@ metadata:
     project: roboshop
     tier: database
 spec:
-  replicas: 1
+  replicas: 2
   # These are the labels replica set use to create pod replicas, this should match pod labels
   selector:
     matchLabels:
@@ -43,22 +83,15 @@ spec:
         envFrom:
         - secretRef:
             name: rabbitmq
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: rabbitmq
-  namespace: roboshop
-  labels:
-    component: rabbitmq
-    project: roboshop
-    tier: database
-spec:
-  selector:
-    component: rabbitmq
-    project: roboshop
-    tier: database
-  ports:
-  - protocol: TCP
-    port: 5672 # service port
-    targetPort: 5672 # container port
+        volumeMounts:
+        - name: rabbitmq-data
+          mountPath: /var/lib/rabbitmq
+  volumeClaimTemplates:
+  - metadata:
+      name: rabbitmq-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ] 
+      storageClassName: "roboshop-ebs-sc"
+      resources:
+        requests:
+          storage: 2Gi
