@@ -13,9 +13,9 @@ data:
   MYSQL_ROOT_PASSWORD: "Um9ib1Nob3BAMQ=="
 ---
 apiVersion: v1
-kind: Service-headless
+kind: Service
 metadata:
-  name: mysql
+  name: mysql-headless
   namespace: roboshop
   labels:
     component: mysql
