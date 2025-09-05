@@ -45,12 +45,12 @@ spec:
               memory: "128Mi"
             limits:
               cpu: "100m"
-              memory: "25gMi"
+              memory: "256Mi"   # ✅ Fixed
           envFrom:
             - configMapRef:
                 name: catalogue
----
 
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -84,9 +84,9 @@ spec:
   minReplicas: 1
   maxReplicas: 10
   metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 10
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 10
