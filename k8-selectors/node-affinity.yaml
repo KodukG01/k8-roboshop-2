@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,6 +5,7 @@ metadata:
   labels:
     environment: dev
 spec:
+  replicas: 1
   selector:
     matchLabels:
       environment: dev
@@ -20,9 +20,9 @@ spec:
             nodeSelectorTerms:
             - matchExpressions:
               - key: hardware
-                operator: In 
-                - gpu
+                operator: In
+                values:
+                  - gpu
       containers:
       - name: with-node-affinity
         image: nginx
-        
