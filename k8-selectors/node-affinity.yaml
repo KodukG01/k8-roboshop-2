@@ -28,7 +28,7 @@ spec:
              preference:
               matchExpressions:
               - key: another-node-label-key
-                operator: In
+                operator: NotIn
                 values:
                 - another-node-label-value
       containers:
